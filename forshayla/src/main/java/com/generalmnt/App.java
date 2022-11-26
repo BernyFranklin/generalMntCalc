@@ -14,6 +14,8 @@ public class App
     private static final double AGE_CONST = 4.92;
     private static final int MALE_CONST = 5;
     private static final int FEMALE_CONST = 161;
+    private static final int FLUID_INIT = 1500;
+    private static final int FLUID_CONST = 20;
     public static void main( String[] args )
     {
         // Create scanner object
@@ -23,6 +25,7 @@ public class App
         double height = 0.0;
         double weight = 0.0;
         double activity = 0.0;
+        double proteinFactor = 0.0;
         int age = 0;
         // Gather info
         System.out.printf("\nPlease enter the following information\n");
@@ -32,7 +35,19 @@ public class App
         height = getHeight(scan);
         weight = getWeight(scan);
         activity = getActivity(scan);
+        proteinFactor = getProteinFactor(scan);
         bigLine();
+        // Calculate Resting Metabolic rate, Estimated Energy Needs, Protein Needs, Fluid needs
+        double rmr = 0.0;
+        double een = 0.0;
+        double epn = 0.0;
+        double efn = 0.0;
+        rmr = calculateRMR(sex, weight, height, age);
+        een = calculateEEN(rmr, activity);
+        epn = calculateEPN(weight, proteinFactor);
+        efn = calculateEFN(weight);
+        // Print initial info
+        // Print calculated info
         
     }
     // This function sets sex to 'M' or 'F'
@@ -153,19 +168,21 @@ public class App
     // This explains and gathers activity info
     private static double getActivity(Scanner scan){
         double activity = 0.0;
+        double minActivity = 1.1;
+        double maxActivity = 2.5;
         boolean valid = true;
         // Print criteria for activity
         System.out.printf("\nActivty rates are as follows");
         printActivity();
         // Collect input
-        while (activity < 1.1 || !valid){
+        while (activity < minActivity || !valid){
             // Reset every loop
             valid = true;
             try{
                 System.out.printf("\nPlease enter your activity rate: ");
                 activity = scan.nextDouble();
 
-                if (activity < 1.1 || activity > 2.5){
+                if (activity < minActivity || activity > maxActivity){
                     // Set flag
                     valid = false;
                     // Alert user
@@ -185,7 +202,39 @@ public class App
         }
         return activity;   
     }
-    
+    // This gets input for the protein factor
+    private static double getProteinFactor(Scanner scan){
+        double pf = 0.0;
+        double minPF = 0.8;
+        double maxPF = 2.0;
+        boolean valid = true;
+
+        while(pf < minPF || !valid){
+            valid = true;
+            try {
+                System.out.printf("\nPlease enter Protein Factor: ");
+                pf = scan.nextDouble();
+
+                if (pf < minPF || pf > maxPF){
+                    // Set flag
+                    valid = false;
+                    // Alert user
+                    System.out.printf("\nProtein factor must be between %s and %s, please try again", minPF, maxPF);
+                }
+            } catch (InputMismatchException e){
+                // Set flag
+                valid = false;
+                // Reinitialize 
+                pf = 0.0;
+                // Clear buffer
+                scan.next();
+                // Alert user
+                System.out.printf("\nProtein factor must be between %s and %s, please try again", minPF, maxPF);
+            }
+        }
+        return pf;
+    }
+    // This prints activity range
     private static void printActivity(){
         System.out.printf("\nSedentary:\t1.1 - 1.4");
         System.out.printf("\nLow Activity:\t1.4 - 1.6");
@@ -206,6 +255,26 @@ public class App
                 break;
         }
         return rmr;
+    }
+    // This function calculates Estimated Energy Needs
+    private static double calculateEEN(double rmr, double activity){
+        double een = 0.0;
+        een = rmr * activity;
+        return een;
+    }
+    // This function calculates Estimated protein needs
+    private static double calculateEPN(double weight, double proteinFactor){
+        double epn = 0.0;
+        epn = weight * proteinFactor;
+        return epn;
+    }
+    // This function calculates Estimated Fluid Needs
+    private static double calculateEFN(double weight){
+        double efn = 0.0;
+        weight -= FLUID_CONST;
+        efn += FLUID_INIT;
+        efn += (weight * FLUID_CONST);
+        return efn;
     }
     // this prints a big ass line
     private static void bigLine(){

@@ -47,6 +47,7 @@ public class App
         epn = calculateEPN(weight, proteinFactor);
         efn = calculateEFN(weight);
         // Print initial info
+        printInitialInfo(sex, age, height, weight, activity);
         // Print calculated info
         
     }
@@ -276,8 +277,30 @@ public class App
         efn += (weight * FLUID_CONST);
         return efn;
     }
+    // Print out all initial info
+    private static void printInitialInfo(char sex, int age, double height, double weight, double activity){
+        String gender = "";
+        switch(sex){
+            case 'M':
+                gender = "Male";
+                break;
+            case 'F':
+                gender = "Female";
+                break;
+            default:
+                break;
+        }
+        System.out.printf("\nNutritional Assessment Info\tYour Answer\n");
+        bigLine();
+        System.out.printf("\nGender:\t\t\t\t%s", gender);
+        System.out.printf("\nAge:\t\t\t\t%d", age);
+        System.out.printf("\nHeight:\t\t\t\t%f cm", height);
+        System.out.printf("\nWeight:\t\t\t\t%f kg", weight);
+        System.out.printf("\nActivity Level:\t\t\t%f\n", activity);
+        bigLine();
+    }
     // this prints a big ass line
     private static void bigLine(){
-        System.out.printf("----------------------------------------\n");
+        System.out.println("---------------------------------------------");
     }
 }

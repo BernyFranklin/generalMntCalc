@@ -4,8 +4,8 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
- * Hello world!
- *
+ * This application gathers info from a patient and calculates their 
+ * daily metabolic needs.
  */
 public class App 
 {
@@ -50,7 +50,8 @@ public class App
         printInitialInfo(sex, age, height, weight, activity);
         // Print calculated info
         printNutritionalNeeds(rmr, een, epn, efn);
-        
+        // Close scanner
+        scan.close();
     }
     // This function sets sex to 'M' or 'F'
     private static char getSex(Scanner scan){
@@ -304,10 +305,10 @@ public class App
     private static void printNutritionalNeeds(double rmr, double een, double epn, double efn){
         System.out.printf("\nNutritional Factors\n");
         bigLine();
-        System.out.printf("\nResting Metabolic Rate:\t\t%.1f", rmr);
-        System.out.printf("\nEstimated Energy Needs:\t\t%.1f kcal", een);
-        System.out.printf("\nEstimated Protein Needs:\t%.1f g", epn);
-        System.out.printf("\nEstimated Fluid Needs:\t\t%.1f mL\n", efn);
+        System.out.printf("\nResting Metabolic Rate:\t\t%.2f kcal", rmr);
+        System.out.printf("\nEstimated Energy Needs:\t\t%.2f kcal", een);
+        System.out.printf("\nEstimated Protein Needs:\t%.2f g", epn);
+        System.out.printf("\nEstimated Fluid Needs:\t\t%.2f mL\n", efn);
         bigLine();
     }
     // this prints a big ass line

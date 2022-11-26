@@ -17,7 +17,7 @@ public class App
     {
         // Create scanner object
         Scanner scan = new Scanner(System.in);
-        // Create Vars
+        // Create general info Vars
         char sex = ' ';
         double height = 0.0;
         double weight = 0.0;
@@ -30,7 +30,8 @@ public class App
         age = getAge(scan);
         height = getHeight(scan);
         weight = getWeight(scan);
-
+        activity = getActivity(scan);
+        bigLine();
         
     }
     // This function sets sex to 'M' or 'F'
@@ -85,7 +86,7 @@ public class App
         return age;
     }
     // This gathers heigh info in cm
-    private static double getHeight(Scanner scan) {
+    private static double getHeight(Scanner scan){
         // Initialize
         double height = 0.0;
         // Flag for valid input
@@ -117,7 +118,7 @@ public class App
         return height;
     }
     // This function returns weight in kg
-    private static double getWeight(Scanner scan) {
+    private static double getWeight(Scanner scan){
         // Initialize
         double weight = 0.0;
         // Flag for valid input
@@ -147,6 +148,48 @@ public class App
             }
         }
         return weight;
+    }
+    // This explains and gathers activity info
+    private static double getActivity(Scanner scan){
+        double activity = 0.0;
+        boolean valid = true;
+        // Print criteria for activity
+        System.out.printf("\nActivty rates are as follows");
+        printActivity();
+        // Collect input
+        while (activity < 1.1 || !valid){
+            // Reset every loop
+            valid = true;
+            try{
+                System.out.printf("\nPlease enter your activity rate: ");
+                activity = scan.nextDouble();
+
+                if (activity < 1.1 || activity > 2.5){
+                    // Set flag
+                    valid = false;
+                    // Alert user
+                    System.out.printf("\nActivity must be a number between 1.1 and 2.5, please try again");
+                }
+            } catch(InputMismatchException e) {
+                // Set flag
+                valid = false;
+                // Reinitialize activity
+                activity = 0.0;
+                // Clear buffer
+                scan.next();
+                // Alert user
+                System.out.printf("\nActivity must be a number between 1.1 and 2.5, please try again");
+
+            }
+        }
+        return activity;   
+    }
+    
+    private static void printActivity(){
+        System.out.printf("\nSedentary:\t1.1 - 1.4");
+        System.out.printf("\nLow Activity:\t1.4 - 1.6");
+        System.out.printf("\nActive:\t\t1.6 - 1.9");
+        System.out.printf("\nVery Active:\t1.9 - 2.5");
     }
     // this prints a big ass line
     private static void bigLine(){

@@ -307,7 +307,7 @@ public class App
         bigLine();
         System.out.printf("\nResting Metabolic Rate:\t\t%.2f kcal", rmr);
         System.out.printf("\nEstimated Energy Needs:\t\t%.2f kcal", een);
-        System.out.printf("\nEstimated Protein Needs:\t%.2f g", epn);
+        System.out.printf("\nEstimated Protein Needs:\t%.2f\tg", epn);
         System.out.printf("\nEstimated Fluid Needs:\t\t%.2f mL\n", efn);
         bigLine();
     }

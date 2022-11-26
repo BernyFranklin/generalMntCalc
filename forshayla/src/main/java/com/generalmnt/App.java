@@ -49,6 +49,7 @@ public class App
         // Print initial info
         printInitialInfo(sex, age, height, weight, activity);
         // Print calculated info
+        printNutritionalNeeds(rmr, een, epn, efn);
         
     }
     // This function sets sex to 'M' or 'F'
@@ -294,9 +295,19 @@ public class App
         bigLine();
         System.out.printf("\nGender:\t\t\t\t%s", gender);
         System.out.printf("\nAge:\t\t\t\t%d", age);
-        System.out.printf("\nHeight:\t\t\t\t%f cm", height);
-        System.out.printf("\nWeight:\t\t\t\t%f kg", weight);
-        System.out.printf("\nActivity Level:\t\t\t%f\n", activity);
+        System.out.printf("\nHeight:\t\t\t\t%.2f cm", height);
+        System.out.printf("\nWeight:\t\t\t\t%.2f kg", weight);
+        System.out.printf("\nActivity Level:\t\t\t%.2f\n", activity);
+        bigLine();
+    }
+    // Prints nutritional needs
+    private static void printNutritionalNeeds(double rmr, double een, double epn, double efn){
+        System.out.printf("\nNutritional Factors\n");
+        bigLine();
+        System.out.printf("\nResting Metabolic Rate:\t\t%.1f", rmr);
+        System.out.printf("\nEstimated Energy Needs:\t\t%.1f kcal", een);
+        System.out.printf("\nEstimated Protein Needs:\t%.1f g", epn);
+        System.out.printf("\nEstimated Fluid Needs:\t\t%.1f mL\n", efn);
         bigLine();
     }
     // this prints a big ass line

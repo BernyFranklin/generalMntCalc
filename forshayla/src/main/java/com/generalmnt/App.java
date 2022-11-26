@@ -9,10 +9,11 @@ import java.util.Scanner;
  */
 public class App 
 {
-    private static final double weightConstant = 9.99;
-    private static final double heightConstant = 6.25;
-    private static final int ageConstantMale = 5;
-    private static final int ageConstantFemale = 161;
+    private static final double WEIGHT_CONST = 9.99;
+    private static final double HEIGHT_CONST = 6.25;
+    private static final double AGE_CONST = 4.92;
+    private static final int MALE_CONST = 5;
+    private static final int FEMALE_CONST = 161;
     public static void main( String[] args )
     {
         // Create scanner object
@@ -190,6 +191,21 @@ public class App
         System.out.printf("\nLow Activity:\t1.4 - 1.6");
         System.out.printf("\nActive:\t\t1.6 - 1.9");
         System.out.printf("\nVery Active:\t1.9 - 2.5");
+    }
+    // This function calculates the resting metabolic rate
+    private static double calculateRMR(char sex, double weight, double height, int age){
+        double rmr = 0.0;
+        switch (sex){
+            case 'M':
+                rmr = (WEIGHT_CONST * weight) + (HEIGHT_CONST * height) - (AGE_CONST * age) + MALE_CONST;
+                break;
+            case 'F':
+                rmr = (WEIGHT_CONST * weight) + (HEIGHT_CONST * height) - (AGE_CONST * age) - FEMALE_CONST;
+                break;
+            default:
+                break;
+        }
+        return rmr;
     }
     // this prints a big ass line
     private static void bigLine(){

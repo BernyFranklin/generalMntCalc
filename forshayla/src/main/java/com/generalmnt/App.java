@@ -27,35 +27,14 @@ public class App
         System.out.printf("\nPlease enter the following information\n");
         bigLine();
         sex = getSex(scan);
+        age = getAge(scan);
+        height = getHeight(scan);
+        weight = getWeight(scan);
 
         
     }
-
-    private static void gatherInfo() {
-            // Flag for valid input
-            Boolean valid = true;
-            while (age <= 0 || !valid){
-                // Reset to true every loop
-                valid = true;
-                // Check for input mismatch
-                try {
-                    System.out.printf("\nAge [Whole numbers only]: ");
-                    age = scan.nextInt();
-                    // Check if age is greater than zero
-                    if (age <=0){
-                        valid = false;
-                        System.out.printf("\nAge must be greater than 0, please try again");
-                    }
-                } catch(InputMismatchException e) {
-                    valid = false;
-                    age = 0;
-                    scan.next();
-                    System.out.printf("\nInput must be whole number, please try again");
-                }
-            }
-        }
-
-    private static char getSex(Scanner scan) {
+    // This function sets sex to 'M' or 'F'
+    private static char getSex(Scanner scan){
         char sex = ' ';
         while (sex != 'M' && sex != 'F') {
             // Temp var for string
@@ -71,9 +50,105 @@ public class App
                 System.out.printf("\nSex must be [M] or [F], please try again\n");
             }
         }
-            return sex;
+        return sex;
     }
-
+    // This function sets age to an int > 0
+    private static int getAge(Scanner scan){
+        // Initialize
+        int age = 0;
+        // Flag for valid input
+        Boolean valid = true;
+        // Loop until valid
+        while (age <= 0 || !valid){
+            // Reset to true every loop
+            valid = true;
+            // Check for input mismatch
+            try {
+                System.out.printf("\nAge [Whole numbers only]: ");
+                age = scan.nextInt();
+                // Check if age is greater than zero
+                if (age <=0){
+                    valid = false;
+                    System.out.printf("\nAge must be greater than 0, please try again");
+                }
+            } catch(InputMismatchException e) {
+                // Set flag
+                valid = false;
+                // Reinitialize age
+                age = 0;
+                // Clear buffer
+                scan.next();
+                // Tell user
+                System.out.printf("\nInput must be whole number, please try again");
+            }
+        }
+        return age;
+    }
+    // This gathers heigh info in cm
+    private static double getHeight(Scanner scan) {
+        // Initialize
+        double height = 0.0;
+        // Flag for valid input
+        Boolean valid = true;
+        // Loop until valid
+        while (height <= 0.0 || !valid) {
+            // Reset to true every loop
+            valid = true;
+            // Check for input mismatch
+            try{
+                System.out.printf("\nHeight in centimeters: ");
+                height = scan.nextDouble();
+                // Check if height is greater than zero
+                if (height <= 0.0) {
+                    valid = false;
+                    System.out.printf("\nHeight must be greater than zero, please try again");
+                }
+            } catch(InputMismatchException e) {
+                // Set flag
+                valid = false;
+                // Reinitialize
+                height = 0.0;
+                // Clear buffer
+                scan.next();
+                // Tell user
+                System.out.printf("\nHeight must be a number in centimeters, please try again");
+            }
+        }
+        return height;
+    }
+    // This function returns weight in kg
+    private static double getWeight(Scanner scan) {
+        // Initialize
+        double weight = 0.0;
+        // Flag for valid input
+        Boolean valid = true;
+        // Loop until valid
+        while (weight <= 0.0 || !valid) {
+            // Reset to true every loop
+            valid = true;
+            // Check for input mismatch
+            try{
+                System.out.printf("\nWeight in kilograms: ");
+                weight = scan.nextDouble();
+                // Check if height is greater than zero
+                if (weight <= 0.0) {
+                    valid = false;
+                    System.out.printf("\nWeight must be greater than zero, please try again");
+                }
+            } catch(InputMismatchException e) {
+                // Set flag
+                valid = false;
+                // Reinitialize
+                weight = 0.0;
+                // Clear buffer
+                scan.next();
+                // Tell user
+                System.out.printf("\nWeight must be a number in kilograms, please try again");
+            }
+        }
+        return weight;
+    }
+    // this prints a big ass line
     private static void bigLine(){
         System.out.printf("----------------------------------------\n");
     }

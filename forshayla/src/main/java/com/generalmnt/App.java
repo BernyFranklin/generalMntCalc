@@ -15,10 +15,6 @@ public class App
     private static final int ageConstantFemale = 161;
     public static void main( String[] args )
     {
-        menu();
-    }
-
-    private static void menu() {
         // Create scanner object
         Scanner scan = new Scanner(System.in);
         // Create Vars
@@ -27,10 +23,40 @@ public class App
         double weight = 0.0;
         double activity = 0.0;
         int age = 0;
-
         // Gather info
         System.out.printf("\nPlease enter the following information\n");
         bigLine();
+        sex = getSex(scan);
+
+        
+    }
+
+    private static void gatherInfo() {
+            // Flag for valid input
+            Boolean valid = true;
+            while (age <= 0 || !valid){
+                // Reset to true every loop
+                valid = true;
+                // Check for input mismatch
+                try {
+                    System.out.printf("\nAge [Whole numbers only]: ");
+                    age = scan.nextInt();
+                    // Check if age is greater than zero
+                    if (age <=0){
+                        valid = false;
+                        System.out.printf("\nAge must be greater than 0, please try again");
+                    }
+                } catch(InputMismatchException e) {
+                    valid = false;
+                    age = 0;
+                    scan.next();
+                    System.out.printf("\nInput must be whole number, please try again");
+                }
+            }
+        }
+
+    private static char getSex(Scanner scan) {
+        char sex = ' ';
         while (sex != 'M' && sex != 'F') {
             // Temp var for string
             String temp = "";
@@ -44,19 +70,8 @@ public class App
             if (sex != 'M' && sex != 'F') {
                 System.out.printf("\nSex must be [M] or [F], please try again\n");
             }
-            Boolean valid = false;
-            while (!valid){
-                try {
-                    System.out.printf("\nAge [Whole numbers only]: ");
-                    age = scan.nextInt();
-                } catch(InputMismatchException e) {
-                    valid = false;
-                    System.out.printf("\nInput must be whole number, please try again");
-                }
-            }
         }
-        
-
+            return sex;
     }
 
     private static void bigLine(){
